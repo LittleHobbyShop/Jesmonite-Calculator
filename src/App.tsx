@@ -85,7 +85,7 @@ const App = () => {
           />
         </Item>
         <Item>
-          <VolumeInput onChange={(e) => handleChangeValue(e, "mass")} />
+          <VolumeInput setMass={setMass} />
         </Item>
         <Item>
           <UnitSelect
