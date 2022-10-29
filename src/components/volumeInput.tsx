@@ -27,7 +27,13 @@ const VolumeInput = ({ setMass }: Props): JSX.Element => {
   }, [unit, value]);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "row" }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+      }}
+    >
       <TextField
         id="standard-basic"
         label="Mould Volume Mass"

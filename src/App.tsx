@@ -3,10 +3,11 @@ import "./App.css";
 import MaterialInput from "./components/materialSelect";
 import VolumeInput from "./components/volumeInput";
 import Typography from "@mui/material/Typography";
-import { materials, units } from "./resources/materials";
+import { materials } from "./resources/materials";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import { Paper, styled } from "@mui/material";
+import ResultOutput from "./components/resultOutput";
 
 interface Obj {
   [key: string]: number;
@@ -23,7 +24,6 @@ const Item = styled(Paper)(({ theme }) => ({
 const App = () => {
   const [material, setMaterial] = useState(0);
   const [mass, setMass] = useState(0);
-  const [unit, setUnit] = useState(0);
   const [output, setOutput] = useState<Obj>({});
 
   const handleChangeValue = (
@@ -38,9 +38,6 @@ const App = () => {
       case "mass":
         setMass(parseInt(e.target.value));
         break;
-      case "unit":
-        setUnit(parseInt(e.target.value));
-        break;
       default:
         break;
     }
@@ -49,21 +46,17 @@ const App = () => {
   useEffect(() => {
     const density: number = materials.bases[material].density;
     const ratio: number = materials.bases[material].ratio;
-    const total = Math.round(mass * density);
+    const total = mass * density;
     if (total > 0) {
       setOutput({
-        powder: Math.round(mass * density * ratio),
-        liquid: Math.round(mass * density * (1 - ratio)),
+        powder: mass * density * ratio,
+        liquid: mass * density * (1 - ratio),
         total: total,
       });
     } else {
       setOutput({});
     }
   }, [mass, material]);
-
-  const capitalise = (string: string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
 
   return (
     <div className="App">
@@ -87,14 +80,7 @@ const App = () => {
         </Item>
 
         <Item>
-          {Object.keys(output).map((key) => {
-            return (
-              <Typography variant="h5" key={`output-${key}`}>
-                {capitalise(key)} = {output[key].toString()}
-                {units.mass[unit].symbol}
-              </Typography>
-            );
-          })}
+          <ResultOutput output={output} />
         </Item>
       </Stack>
     </div>
