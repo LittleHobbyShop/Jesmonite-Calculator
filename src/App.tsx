@@ -28,16 +28,24 @@ const App = () => {
   const [unit, setUnit] = useState(0);
   const [output, setOutput] = useState<Obj>({});
 
-  const handleChangeMaterial = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMaterial(parseInt(e.target.value));
-  };
-
-  const handleChangeMass = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMass(parseInt(e.target.value));
-  };
-
-  const handleChangeunit = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUnit(parseInt(e.target.value));
+  const handleChangeValue = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    property: string
+  ) => {
+    console.log(property, e.target.value);
+    switch (property) {
+      case "material":
+        setMaterial(parseInt(e.target.value));
+        break;
+      case "mass":
+        setMass(parseInt(e.target.value));
+        break;
+      case "unit":
+        setUnit(parseInt(e.target.value));
+        break;
+      default:
+        break;
+    }
   };
 
   useEffect(() => {
@@ -64,33 +72,38 @@ const App = () => {
       <Stack
         spacing={2}
         divider={<Divider orientation="horizontal" flexItem />}
-        sx={{ maxWidth: 600, alignItems: "center" }}
+        sx={{ maxWidth: 600, alignItems: "left" }}
       >
         <Item>
           <Typography variant="h4">Jesmonite Calculator</Typography>
         </Item>
         {/* <FormControl> */}
         <Item>
-          <MaterialInput value={material} onChange={handleChangeMaterial} />
+          <MaterialInput
+            value={material}
+            onChange={(e) => handleChangeValue(e, "material")}
+          />
         </Item>
         <Item>
-          <VolumeInput onChange={handleChangeMass} />
+          <VolumeInput onChange={(e) => handleChangeValue(e, "mass")} />
         </Item>
         <Item>
-          <UnitSelect unit={unit} onChange={handleChangeunit} />
+          <UnitSelect
+            unit={unit}
+            onChange={(e) => handleChangeValue(e, "unit")}
+          />
         </Item>
         {/* </FormControl> */}
-        {Object.keys(output).map((key) => {
-          console.log(key);
-          return (
-            <Item>
-              <Typography variant="h5">
+        <Item>
+          {Object.keys(output).map((key) => {
+            return (
+              <Typography variant="h5" key={`output-${key}`}>
                 {capitalise(key)} = {output[key].toString()}
                 {units.mass[unit].symbol}
               </Typography>
-            </Item>
-          );
-        })}
+            );
+          })}
+        </Item>
       </Stack>
     </div>
   );

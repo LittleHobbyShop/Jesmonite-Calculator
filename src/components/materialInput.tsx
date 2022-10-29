@@ -7,7 +7,7 @@ import { Fragment } from "react";
 
 type Props = {
   value: number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>, property: string) => void;
 };
 
 const MaterialInput = ({ value, onChange }: Props): JSX.Element => {
