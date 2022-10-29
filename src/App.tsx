@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-//import FormControl from "@mui/material/FormControl";
 import MaterialInput from "./components/materialSelect";
 import VolumeInput from "./components/volumeInput";
-import UnitSelect from "./components/unitSelect";
 import Typography from "@mui/material/Typography";
 import { materials, units } from "./resources/materials";
 import Stack from "@mui/material/Stack";
@@ -77,7 +75,7 @@ const App = () => {
         <Item>
           <Typography variant="h4">Jesmonite Calculator</Typography>
         </Item>
-        {/* <FormControl> */}
+
         <Item>
           <MaterialInput
             value={material}
@@ -87,13 +85,7 @@ const App = () => {
         <Item>
           <VolumeInput setMass={setMass} />
         </Item>
-        <Item>
-          <UnitSelect
-            unit={unit}
-            onChange={(e) => handleChangeValue(e, "unit")}
-          />
-        </Item>
-        {/* </FormControl> */}
+
         <Item>
           {Object.keys(output).map((key) => {
             return (
