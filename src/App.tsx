@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 //import FormControl from "@mui/material/FormControl";
-import MaterialInput from "./components/materialInput";
+import MaterialInput from "./components/materialSelect";
 import VolumeInput from "./components/volumeInput";
 import UnitSelect from "./components/unitSelect";
 import Typography from "@mui/material/Typography";
