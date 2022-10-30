@@ -24,7 +24,7 @@ const VolumeInput = ({ setMass }: Props): JSX.Element => {
   useEffect(() => {
     const multiplier: number = units.mass[unit].multiplier;
     setMass(value * multiplier);
-  }, [unit, value]);
+  }, [unit, value, setMass]);
 
   return (
     <Box
